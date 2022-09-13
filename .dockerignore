@@ -1,4 +1,5 @@
 */.keystone/*
-*/node_modules/*
 */docker/*
 */git/*
+**/node_modules
+**/migrates
