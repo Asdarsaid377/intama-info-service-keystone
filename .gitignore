@@ -6,4 +6,5 @@ public/images/*
 migrations/*
 schema.prisma
 .env
+.keystone/*
 !*/docker/.env
