@@ -13,7 +13,7 @@ generator client {
 }
 
 model User {
-  id       String @id @default(cuid())
+  id       String @id @default(uuid())
   name     String @default("")
   email    String @unique @default("")
   password String
@@ -21,7 +21,7 @@ model User {
 }
 
 model LandingPage {
-  id                   String  @id @default(cuid())
+  id                   String  @id @default(uuid())
   headerLogo_filesize  Int?
   headerLogo_extension String?
   headerLogo_width     Int?
@@ -34,18 +34,18 @@ model LandingPage {
 }
 
 model Product {
-  id    String @id @default(cuid())
+  id    String @id @default(uuid())
   title String @default("")
 }
 
 model Carrer {
-  id    String @id @default(cuid())
+  id    String @id @default(uuid())
   title String @default("")
   about Json   @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
 }
 
 model Post {
-  id          String    @id @default(cuid())
+  id          String    @id @default(uuid())
   title       String    @default("")
   status      String?   @default("draft")
   content     Json      @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
@@ -58,7 +58,7 @@ model Post {
 }
 
 model Tag {
-  id    String @id @default(cuid())
+  id    String @id @default(uuid())
   name  String @default("")
   posts Post[] @relation("Post_tags")
 }
