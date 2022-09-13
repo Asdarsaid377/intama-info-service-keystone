@@ -1,0 +1,9 @@
+services:
+  intama-services-keystone:
+    container_name: intama_service-keystone
+    image: intama-service/keystone:0.01
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - 3000:3000
