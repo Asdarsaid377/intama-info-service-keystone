@@ -103,6 +103,7 @@ export const lists: Lists = {
   /** product schema */
   Product: list(ProductSchema),
 
+  
   // Tag Form
   Tag: list({
     ui: {
