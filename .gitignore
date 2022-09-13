@@ -4,5 +4,5 @@ keystone.db
 *.log
 public/images/*
 migrations/*
-.env
+./.env
 schema.prisma
