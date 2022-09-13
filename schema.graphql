@@ -222,83 +222,6 @@ input LandingPageCreateInput {
   portofolio: JSON
 }
 
-type Product {
-  id: ID!
-  title: String
-}
-
-input ProductWhereUniqueInput {
-  id: ID
-}
-
-input ProductWhereInput {
-  AND: [ProductWhereInput!]
-  OR: [ProductWhereInput!]
-  NOT: [ProductWhereInput!]
-  id: IDFilter
-  title: StringFilter
-}
-
-input ProductOrderByInput {
-  id: OrderDirection
-  title: OrderDirection
-}
-
-input ProductUpdateInput {
-  title: String
-}
-
-input ProductUpdateArgs {
-  where: ProductWhereUniqueInput!
-  data: ProductUpdateInput!
-}
-
-input ProductCreateInput {
-  title: String
-}
-
-type Carrer {
-  id: ID!
-  title: String
-  about: Carrer_about_Document
-}
-
-type Carrer_about_Document {
-  document(hydrateRelationships: Boolean! = false): JSON!
-}
-
-input CarrerWhereUniqueInput {
-  id: ID
-}
-
-input CarrerWhereInput {
-  AND: [CarrerWhereInput!]
-  OR: [CarrerWhereInput!]
-  NOT: [CarrerWhereInput!]
-  id: IDFilter
-  title: StringFilter
-}
-
-input CarrerOrderByInput {
-  id: OrderDirection
-  title: OrderDirection
-}
-
-input CarrerUpdateInput {
-  title: String
-  about: JSON
-}
-
-input CarrerUpdateArgs {
-  where: CarrerWhereUniqueInput!
-  data: CarrerUpdateInput!
-}
-
-input CarrerCreateInput {
-  title: String
-  about: JSON
-}
-
 type Post {
   id: ID!
   title: String
@@ -436,6 +359,103 @@ input TagRelateToManyForCreateInput {
   connect: [TagWhereUniqueInput!]
 }
 
+type Career {
+  id: ID!
+  title: String
+  description: Career_description_Document
+  Requirements: Career_Requirements_Document
+  created_at: DateTime
+}
+
+type Career_description_Document {
+  document(hydrateRelationships: Boolean! = false): JSON!
+}
+
+type Career_Requirements_Document {
+  document(hydrateRelationships: Boolean! = false): JSON!
+}
+
+input CareerWhereUniqueInput {
+  id: ID
+}
+
+input CareerWhereInput {
+  AND: [CareerWhereInput!]
+  OR: [CareerWhereInput!]
+  NOT: [CareerWhereInput!]
+  id: IDFilter
+  title: StringFilter
+  created_at: DateTimeNullableFilter
+}
+
+input CareerOrderByInput {
+  id: OrderDirection
+  title: OrderDirection
+  created_at: OrderDirection
+}
+
+input CareerUpdateInput {
+  title: String
+  description: JSON
+  Requirements: JSON
+  created_at: DateTime
+}
+
+input CareerUpdateArgs {
+  where: CareerWhereUniqueInput!
+  data: CareerUpdateInput!
+}
+
+input CareerCreateInput {
+  title: String
+  description: JSON
+  Requirements: JSON
+  created_at: DateTime
+}
+
+type Product {
+  id: ID!
+  gambar: ImageFieldOutput
+  name: String
+  description: String
+}
+
+input ProductWhereUniqueInput {
+  id: ID
+}
+
+input ProductWhereInput {
+  AND: [ProductWhereInput!]
+  OR: [ProductWhereInput!]
+  NOT: [ProductWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  description: StringFilter
+}
+
+input ProductOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  description: OrderDirection
+}
+
+input ProductUpdateInput {
+  gambar: ImageFieldInput
+  name: String
+  description: String
+}
+
+input ProductUpdateArgs {
+  where: ProductWhereUniqueInput!
+  data: ProductUpdateInput!
+}
+
+input ProductCreateInput {
+  gambar: ImageFieldInput
+  name: String
+  description: String
+}
+
 type Tag {
   id: ID!
   name: String
@@ -505,6 +525,18 @@ type Mutation {
   updateLandingPages(data: [LandingPageUpdateArgs!]!): [LandingPage]
   deleteLandingPage(where: LandingPageWhereUniqueInput!): LandingPage
   deleteLandingPages(where: [LandingPageWhereUniqueInput!]!): [LandingPage]
+  createPost(data: PostCreateInput!): Post
+  createPosts(data: [PostCreateInput!]!): [Post]
+  updatePost(where: PostWhereUniqueInput!, data: PostUpdateInput!): Post
+  updatePosts(data: [PostUpdateArgs!]!): [Post]
+  deletePost(where: PostWhereUniqueInput!): Post
+  deletePosts(where: [PostWhereUniqueInput!]!): [Post]
+  createCareer(data: CareerCreateInput!): Career
+  createCareers(data: [CareerCreateInput!]!): [Career]
+  updateCareer(where: CareerWhereUniqueInput!, data: CareerUpdateInput!): Career
+  updateCareers(data: [CareerUpdateArgs!]!): [Career]
+  deleteCareer(where: CareerWhereUniqueInput!): Career
+  deleteCareers(where: [CareerWhereUniqueInput!]!): [Career]
   createProduct(data: ProductCreateInput!): Product
   createProducts(data: [ProductCreateInput!]!): [Product]
   updateProduct(
@@ -514,18 +546,6 @@ type Mutation {
   updateProducts(data: [ProductUpdateArgs!]!): [Product]
   deleteProduct(where: ProductWhereUniqueInput!): Product
   deleteProducts(where: [ProductWhereUniqueInput!]!): [Product]
-  createCarrer(data: CarrerCreateInput!): Carrer
-  createCarrers(data: [CarrerCreateInput!]!): [Carrer]
-  updateCarrer(where: CarrerWhereUniqueInput!, data: CarrerUpdateInput!): Carrer
-  updateCarrers(data: [CarrerUpdateArgs!]!): [Carrer]
-  deleteCarrer(where: CarrerWhereUniqueInput!): Carrer
-  deleteCarrers(where: [CarrerWhereUniqueInput!]!): [Carrer]
-  createPost(data: PostCreateInput!): Post
-  createPosts(data: [PostCreateInput!]!): [Post]
-  updatePost(where: PostWhereUniqueInput!, data: PostUpdateInput!): Post
-  updatePosts(data: [PostUpdateArgs!]!): [Post]
-  deletePost(where: PostWhereUniqueInput!): Post
-  deletePosts(where: [PostWhereUniqueInput!]!): [Post]
   createTag(data: TagCreateInput!): Tag
   createTags(data: [TagCreateInput!]!): [Tag]
   updateTag(where: TagWhereUniqueInput!, data: TagUpdateInput!): Tag
@@ -578,22 +598,6 @@ type Query {
   ): [LandingPage!]
   landingPage(where: LandingPageWhereUniqueInput!): LandingPage
   landingPagesCount(where: LandingPageWhereInput! = {}): Int
-  products(
-    where: ProductWhereInput! = {}
-    orderBy: [ProductOrderByInput!]! = []
-    take: Int
-    skip: Int! = 0
-  ): [Product!]
-  product(where: ProductWhereUniqueInput!): Product
-  productsCount(where: ProductWhereInput! = {}): Int
-  carrers(
-    where: CarrerWhereInput! = {}
-    orderBy: [CarrerOrderByInput!]! = []
-    take: Int
-    skip: Int! = 0
-  ): [Carrer!]
-  carrer(where: CarrerWhereUniqueInput!): Carrer
-  carrersCount(where: CarrerWhereInput! = {}): Int
   posts(
     where: PostWhereInput! = {}
     orderBy: [PostOrderByInput!]! = []
@@ -602,6 +606,22 @@ type Query {
   ): [Post!]
   post(where: PostWhereUniqueInput!): Post
   postsCount(where: PostWhereInput! = {}): Int
+  careers(
+    where: CareerWhereInput! = {}
+    orderBy: [CareerOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Career!]
+  career(where: CareerWhereUniqueInput!): Career
+  careersCount(where: CareerWhereInput! = {}): Int
+  products(
+    where: ProductWhereInput! = {}
+    orderBy: [ProductOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Product!]
+  product(where: ProductWhereUniqueInput!): Product
+  productsCount(where: ProductWhereInput! = {}): Int
   tags(
     where: TagWhereInput! = {}
     orderBy: [TagOrderByInput!]! = []

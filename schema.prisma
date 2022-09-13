@@ -37,17 +37,6 @@ model LandingPage {
   portofolio        String  @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
 }
 
-model Product {
-  id    String @id @default(cuid())
-  title String @default("")
-}
-
-model Carrer {
-  id    String @id @default(cuid())
-  title String @default("")
-  about String @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
-}
-
 model Post {
   id          String    @id @default(cuid())
   title       String    @default("")
@@ -59,6 +48,25 @@ model Post {
   tags        Tag[]     @relation("Post_tags")
 
   @@index([authorId])
+}
+
+model Career {
+  id           String    @id @default(cuid())
+  title        String    @default("")
+  description  String    @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  Requirements String    @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  created_at   DateTime?
+}
+
+model Product {
+  id               String  @id @default(cuid())
+  gambar_filesize  Int?
+  gambar_extension String?
+  gambar_width     Int?
+  gambar_height    Int?
+  gambar_id        String?
+  name             String  @default("")
+  description      String  @default("")
 }
 
 model Tag {
