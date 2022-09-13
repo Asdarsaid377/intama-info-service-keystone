@@ -1,9 +1,6 @@
-# https://docs.docker.com/samples/library/node/
 ARG NODE_VERSION=16.17.0
 
-# Build container
 FROM node:${NODE_VERSION}-alpine AS build
-ARG DUMB_INIT_VERSION
 
 WORKDIR /home/node
 
@@ -17,7 +14,6 @@ RUN yarn install
 ADD . /home/node
 
 RUN yarn build && yarn cache clean
-
 # Runtime container
 FROM node:${NODE_VERSION}-alpine
 

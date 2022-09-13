@@ -35,23 +35,26 @@ export const lists: Lists = {
 	// Landing Page Form
 	LandingPage: list({
 		fields: {
-			title: text(),
-			header: text(),
+			headerLogo: image({ storage: "my_local_images" }),
 			visi: text(),
-			misi: multiselect({
-				options: [
-					{ label: "Misi 1", value: "misi1" },
-					{ label: "Misi 2", value: "misi2" },
+			misi: text(),
+			about: document({
+				formatting: true,
+				links: true,
+				layouts: [
+					[1, 1],
+					[1, 1, 1],
+					[2, 1],
+					[1, 2],
+					[1, 2, 1],
 				],
 			}),
-			avatar: image({ storage: "my_local_images" }),
-			someFile: file({ storage: "my_s3_files" }),
-			about: text(),
 			portofolio: document({
 				formatting: true,
 			}),
 		},
 	}),
+
 	// Product Firm
 	Product: list({
 		fields: {
