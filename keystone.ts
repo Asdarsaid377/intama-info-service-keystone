@@ -15,8 +15,8 @@ const {
 export default withAuth(
 	config({
 		db: {
-			provider: "sqlite",
-			url: "file:./keystone.db",
+			provider: "mysql",
+			url: "mysql://root:root@localhost:3306/Intama",
 		},
 		ui: {
 			isAccessAllowed: (context) => !!context.session?.data,

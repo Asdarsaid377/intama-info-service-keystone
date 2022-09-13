@@ -123,13 +123,10 @@ input PostRelateToManyForCreateInput {
 
 type LandingPage {
   id: ID!
-  title: String
-  header: String
+  headerLogo: ImageFieldOutput
   visi: String
-  misi: [String!]
-  avatar: ImageFieldOutput
-  someFile: FileFieldOutput
-  about: String
+  misi: String
+  about: LandingPage_about_Document
   portofolio: LandingPage_portofolio_Document
 }
 
@@ -149,10 +146,8 @@ enum ImageExtension {
   gif
 }
 
-type FileFieldOutput {
-  filename: String!
-  filesize: Int!
-  url: String!
+type LandingPage_about_Document {
+  document(hydrateRelationships: Boolean! = false): JSON!
 }
 
 type LandingPage_portofolio_Document {
@@ -168,28 +163,21 @@ input LandingPageWhereInput {
   OR: [LandingPageWhereInput!]
   NOT: [LandingPageWhereInput!]
   id: IDFilter
-  title: StringFilter
-  header: StringFilter
   visi: StringFilter
-  about: StringFilter
+  misi: StringFilter
 }
 
 input LandingPageOrderByInput {
   id: OrderDirection
-  title: OrderDirection
-  header: OrderDirection
   visi: OrderDirection
-  about: OrderDirection
+  misi: OrderDirection
 }
 
 input LandingPageUpdateInput {
-  title: String
-  header: String
+  headerLogo: ImageFieldInput
   visi: String
-  misi: [String!]
-  avatar: ImageFieldInput
-  someFile: FileFieldInput
-  about: String
+  misi: String
+  about: JSON
   portofolio: JSON
 }
 
@@ -202,23 +190,16 @@ The `Upload` scalar type represents a file upload.
 """
 scalar Upload
 
-input FileFieldInput {
-  upload: Upload!
-}
-
 input LandingPageUpdateArgs {
   where: LandingPageWhereUniqueInput!
   data: LandingPageUpdateInput!
 }
 
 input LandingPageCreateInput {
-  title: String
-  header: String
+  headerLogo: ImageFieldInput
   visi: String
-  misi: [String!]
-  avatar: ImageFieldInput
-  someFile: FileFieldInput
-  about: String
+  misi: String
+  about: JSON
   portofolio: JSON
 }
 
