@@ -10,13 +10,24 @@ const {
   S3_ACCESS_KEY_ID: accessKeyId = "keystone",
   S3_SECRET_ACCESS_KEY: secretAccessKey = "keystone",
   ASSET_BASE_URL: baseUrl = "http://localhost:3000",
+  KEYSTONE_DB_USER,
+  KEYSTONE_DB_PASSWORD,
+  MYSQL_HOST_APP,
+  KEYSTONE_DB_NAME,
 } = process.env;
 
 export default withAuth(
   config({
     db: {
-      provider: "sqlite",
-      url: "file:./keystone.db",
+      provider: "mysql",
+      url: `mysql://${KEYSTONE_DB_USER}:${KEYSTONE_DB_PASSWORD}@${MYSQL_HOST_APP}:3306/${KEYSTONE_DB_NAME}`,
+      onConnect: async (context) => {
+        /* ... */
+      },
+      // Optional advanced configuration
+      enableLogging: true,
+      useMigrations: true,
+      idField: { kind: "uuid" },
     },
     ui: {
       isAccessAllowed: (context) => !!context.session?.data,
