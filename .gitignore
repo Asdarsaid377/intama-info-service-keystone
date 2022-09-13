@@ -1,8 +1,0 @@
-node_modules
-.keystone/admin
-keystone.db
-*.log
-public/images/*
-migrations/*
-./.env
-schema.prisma
