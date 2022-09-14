@@ -7,4 +7,4 @@ migrations/*
 schema.prisma
 .env
 .keystone/*
-!*/docker/.env
+!docker/.env
