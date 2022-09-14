@@ -14,6 +14,7 @@ RUN yarn install
 ADD . /home/node
 
 RUN yarn build && yarn cache clean
+
 # Runtime container
 FROM node:${NODE_VERSION}-alpine
 

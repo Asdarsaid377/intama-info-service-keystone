@@ -1,7 +1,10 @@
 version: "3"
 services:
   node:
-    image: testing
+    image: testing:0.01
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: intama-service-keystone
     ports:
       - "3000:3000"
@@ -20,7 +23,7 @@ services:
       - mariadb
 
   mariadb:
-    image: mariadb:latest
+    image: mariadb:10.9.2
     container_name: intama-service-db
     ports:
       - "3306:3306"
