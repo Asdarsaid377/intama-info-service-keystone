@@ -21,4 +21,4 @@ WORKDIR /home/node
 
 COPY --from=build /home/node /home/node
 
-CMD ["yarn", "start"]
+CMD ["yarn", "run-prod"]

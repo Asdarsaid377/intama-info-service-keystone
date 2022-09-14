@@ -5,7 +5,7 @@ services:
     container_name: intama_service_db
     restart: always
     volumes:
-      - ~/apps/mariadb:/var/lib/mysql
+      - ~/apps/mariadb2:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: ${KEYSTONE_DB_USER:-admin}
