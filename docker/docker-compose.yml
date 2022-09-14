@@ -1,6 +1,8 @@
 version: "3"
 services:
   intama_service_db:
+    env_file:
+      - ../.env
     image: mariadb:10.9.2
     container_name: intama_service_db
     restart: always
@@ -14,7 +16,7 @@ services:
 
   intama-services-keystone:
     env_file:
-      - ./.env
+      - ../.env
     container_name: intama_service-keystone
     image: intama-service/keystone:0.01
     build:
