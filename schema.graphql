@@ -203,6 +203,74 @@ input LandingPageCreateInput {
   portofolio: JSON
 }
 
+type Apply {
+  id: ID!
+  name: String
+  telpon: String
+  email: String
+  university: String
+  programStudy: String
+  cv: FileFieldOutput
+}
+
+type FileFieldOutput {
+  filename: String!
+  filesize: Int!
+  url: String!
+}
+
+input ApplyWhereUniqueInput {
+  id: ID
+}
+
+input ApplyWhereInput {
+  AND: [ApplyWhereInput!]
+  OR: [ApplyWhereInput!]
+  NOT: [ApplyWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  telpon: StringFilter
+  email: StringFilter
+  university: StringFilter
+  programStudy: StringFilter
+}
+
+input ApplyOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  telpon: OrderDirection
+  email: OrderDirection
+  university: OrderDirection
+  programStudy: OrderDirection
+}
+
+input ApplyUpdateInput {
+  name: String
+  telpon: String
+  email: String
+  university: String
+  programStudy: String
+  cv: FileFieldInput
+}
+
+input FileFieldInput {
+  upload: Upload!
+}
+
+input ApplyUpdateArgs {
+  where: ApplyWhereUniqueInput!
+  data: ApplyUpdateInput!
+}
+
+input ApplyCreateInput {
+  name: String
+  telpon: String
+  email: String
+  university: String
+  programStudy: String
+  cv: FileFieldInput
+}
+
 type Post {
   id: ID!
   title: String
@@ -546,6 +614,12 @@ type Mutation {
   updateLandingPages(data: [LandingPageUpdateArgs!]!): [LandingPage]
   deleteLandingPage(where: LandingPageWhereUniqueInput!): LandingPage
   deleteLandingPages(where: [LandingPageWhereUniqueInput!]!): [LandingPage]
+  createApply(data: ApplyCreateInput!): Apply
+  createApplies(data: [ApplyCreateInput!]!): [Apply]
+  updateApply(where: ApplyWhereUniqueInput!, data: ApplyUpdateInput!): Apply
+  updateApplies(data: [ApplyUpdateArgs!]!): [Apply]
+  deleteApply(where: ApplyWhereUniqueInput!): Apply
+  deleteApplies(where: [ApplyWhereUniqueInput!]!): [Apply]
   createPost(data: PostCreateInput!): Post
   createPosts(data: [PostCreateInput!]!): [Post]
   updatePost(where: PostWhereUniqueInput!, data: PostUpdateInput!): Post
@@ -628,6 +702,14 @@ type Query {
   ): [LandingPage!]
   landingPage(where: LandingPageWhereUniqueInput!): LandingPage
   landingPagesCount(where: LandingPageWhereInput! = {}): Int
+  applies(
+    where: ApplyWhereInput! = {}
+    orderBy: [ApplyOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Apply!]
+  apply(where: ApplyWhereUniqueInput!): Apply
+  appliesCount(where: ApplyWhereInput! = {}): Int
   posts(
     where: PostWhereInput! = {}
     orderBy: [PostOrderByInput!]! = []
