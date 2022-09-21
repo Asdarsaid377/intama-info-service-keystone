@@ -1,10 +1,7 @@
 version: "3"
 services:
   node:
-    image: testing:0.01
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: intama-info-v.1:latest
     container_name: intama-service-keystone
     ports:
       - "3000:3000"
