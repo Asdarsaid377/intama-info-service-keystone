@@ -1,8 +1,6 @@
 version: "3"
 services:
   intama_service_db:
-    env_file:
-      - ../.env
     image: mariadb:10.9.2
     container_name: intama_service_db
     restart: always
@@ -10,7 +8,7 @@ services:
       - ~/apps/mariadb:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: ${KEYSTONE_DB_USER:-admin}
+      MYSQL_USER: ${KEYSTONE_DB_USER:?err}
       MYSQL_PASSWORD: ${KEYSTONE_DB_PASSWORD:-password}
       MYSQL_DATABASE: ${KEYSTONE_DB_NAME:-intama}
 
@@ -24,10 +22,12 @@ services:
       dockerfile: ./docker/Dockerfile
     ports:
       - 3000:3000
+    # volumes:
+    #   - "../:/intama-service-keystone"
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      KEYSTONE_DB_PASSWORD: ${KEYSTONE_DB_PASSWORD}
-      KEYSTONE_DB_USER: ${KEYSTONE_DB_USER:-admin}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      KEYSTONE_DB_PASSWORD: ${KEYSTONE_DB_PASSWORD:-password}
+      KEYSTONE_DB_USER: ${KEYSTONE_DB_USER:?err}
       KEYSTONE_DB_NAME: ${KEYSTONE_DB_NAME:-intama}
       KEYSTONE_DEBUG: ${KEYSTONE_DEBUG:-"false"}
       MYSQL_HOST_APP: intama_service_db

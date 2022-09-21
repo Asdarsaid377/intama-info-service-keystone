@@ -4,6 +4,5 @@ keystone.db
 public/images/*
 migrations/*
 .env
-schema.prisma
 .keystone/*
-!docker/.env
+!./docker/.env

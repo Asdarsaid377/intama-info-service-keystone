@@ -14,6 +14,7 @@ RUN yarn install
 ADD . /home/node
 
 RUN yarn build && yarn cache clean
+
 # Runtime container
 FROM node:${NODE_VERSION}-alpine
 
@@ -21,4 +22,4 @@ WORKDIR /home/node
 
 COPY --from=build /home/node /home/node
 
-CMD ["yarn", "start"]
+CMD ["yarn", "run-prod"]

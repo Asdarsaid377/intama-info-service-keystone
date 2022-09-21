@@ -437,6 +437,46 @@ input ProductCreateInput {
   description: String
 }
 
+type Contact {
+  id: ID!
+  name: String
+  value: String
+}
+
+input ContactWhereUniqueInput {
+  id: ID
+}
+
+input ContactWhereInput {
+  AND: [ContactWhereInput!]
+  OR: [ContactWhereInput!]
+  NOT: [ContactWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  value: StringFilter
+}
+
+input ContactOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  value: OrderDirection
+}
+
+input ContactUpdateInput {
+  name: String
+  value: String
+}
+
+input ContactUpdateArgs {
+  where: ContactWhereUniqueInput!
+  data: ContactUpdateInput!
+}
+
+input ContactCreateInput {
+  name: String
+  value: String
+}
+
 type Tag {
   id: ID!
   name: String
@@ -527,6 +567,15 @@ type Mutation {
   updateProducts(data: [ProductUpdateArgs!]!): [Product]
   deleteProduct(where: ProductWhereUniqueInput!): Product
   deleteProducts(where: [ProductWhereUniqueInput!]!): [Product]
+  createContact(data: ContactCreateInput!): Contact
+  createContacts(data: [ContactCreateInput!]!): [Contact]
+  updateContact(
+    where: ContactWhereUniqueInput!
+    data: ContactUpdateInput!
+  ): Contact
+  updateContacts(data: [ContactUpdateArgs!]!): [Contact]
+  deleteContact(where: ContactWhereUniqueInput!): Contact
+  deleteContacts(where: [ContactWhereUniqueInput!]!): [Contact]
   createTag(data: TagCreateInput!): Tag
   createTags(data: [TagCreateInput!]!): [Tag]
   updateTag(where: TagWhereUniqueInput!, data: TagUpdateInput!): Tag
@@ -603,6 +652,14 @@ type Query {
   ): [Product!]
   product(where: ProductWhereUniqueInput!): Product
   productsCount(where: ProductWhereInput! = {}): Int
+  contacts(
+    where: ContactWhereInput! = {}
+    orderBy: [ContactOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Contact!]
+  contact(where: ContactWhereUniqueInput!): Contact
+  contactsCount(where: ContactWhereInput! = {}): Int
   tags(
     where: TagWhereInput! = {}
     orderBy: [TagOrderByInput!]! = []

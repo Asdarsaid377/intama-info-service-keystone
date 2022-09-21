@@ -5,6 +5,7 @@ import { document } from "@keystone-6/fields-document";
 import { Lists } from ".keystone/types";
 import { CareerSchema } from "./schema/career.schema";
 import { ProductSchema } from "./schema/product.schema";
+import { ContactSchema } from "./schema/contact.schema";
 
 // User Form
 export const lists: Lists = {
@@ -106,6 +107,8 @@ export const lists: Lists = {
   /** product schema */
   Product: list(ProductSchema),
 
+  /** contact schema */
+  Contact: list(ContactSchema),
   // Tag Form
   Tag: list({
     ui: {
